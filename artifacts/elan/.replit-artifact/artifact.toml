@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Élan — Impulso autodidacta"
+description = "A responsive Spanish-language learning hub for technology students, with guided learning paths, orientation tools, courses, resources, news, jobs, and support features."
+version = "1.0.0"
+id = "artifacts/elan"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22023
+
+[services.development]
+run = "pnpm --filter @workspace/elan run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/elan", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/elan/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22023"
+BASE_PATH = "/"
