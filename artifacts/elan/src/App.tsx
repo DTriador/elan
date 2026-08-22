@@ -589,15 +589,38 @@ function Home() {
         </section>
 
         <section className="section" id="news">
-          <div className="container"><div className="section-heading"><span className="eyebrow">05 / al día</span><h2>Lo que estamos <em>anotando.</em></h2><p>Ideas, lanzamientos y señales del mercado para que tu aprendizaje tenga contexto.</p></div><div className="news-grid">
-            {newsItems.map((item) => (
-              <article className="news-card" key={item.id}>
-                <span>{item.tag} · {item.readTime}</span>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </article>
-            ))}
-          </div></div>
+          <div className="container">
+            <div className="section-heading">
+              <span className="eyebrow">05 / al día</span>
+              <h2>
+                Lo que estamos <em>anotando.</em>
+              </h2>
+              <p>
+                Ideas, lanzamientos y señales del mercado para que tu aprendizaje tenga contexto.
+              </p>
+            </div>
+
+            <div className="news-grid">
+              {newsItems.map((item) => (
+                <a
+                  className="news-card"
+                  key={item.id}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid={`link-news-${item.id}`}
+                >
+                  <span>
+                    {item.tag} · {item.readTime}
+                  </span>
+
+                  <h3>{item.title}</h3>
+
+                  <p>{item.desc}</p>
+                </a>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section className="section jobs-section" id="jobs">
