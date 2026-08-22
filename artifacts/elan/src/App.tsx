@@ -21,7 +21,6 @@ import {
   Database,
   ExternalLink,
   GitBranch,
-  GraduationCap,
   MapPin,
   Menu,
   Network,
@@ -264,7 +263,6 @@ function Home() {
   const [quizStep, setQuizStep] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState<number[]>([]);
   const [quizResult, setQuizResult] = useState<QuizProfile | null>(null);
-  const [showGap, setShowGap] = useState(false);
   const [recommendedCategories, setRecommendedCategories] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPath, setSelectedPath] = useState<LearningPath | null>(null);
@@ -530,12 +528,6 @@ function Home() {
                   <div className="option-list">{quizQuestions[quizStep].options.map((option, index) => <button className={`option ${quizAnswers[quizStep] === index ? 'selected' : ''}`} key={option.label} onClick={() => chooseAnswer(index)} data-testid={`button-quiz-option-${quizStep}-${index}`}><span className="option-mark">{String.fromCharCode(65 + index)}</span><span className="option-copy"><strong>{option.label}</strong></span></button>)}</div>
                   <div className="quiz-actions"><button className="btn btn-outline btn-small" disabled={quizStep === 0} onClick={() => setQuizStep(quizStep - 1)} data-testid="button-quiz-back"><ChevronLeft size={14} /> Atrás</button><button className="btn btn-primary btn-small" disabled={quizAnswers[quizStep] === undefined} onClick={submitQuiz} data-testid="button-quiz-next">{quizStep === quizQuestions.length - 1 ? 'Ver resultado' : 'Siguiente'} <ChevronRight size={14} /></button></div>
                 </> : <div className="result-card"><div className="result-icon"><Sparkles size={19} /></div><span className="script">Tu próximo movimiento</span><h3>{quizResult}</h3><p>Tu resultado combina lo que te da curiosidad con el tipo de problemas que quieres resolver. Empieza con estos temas y deja que tu próxima evidencia te marque el siguiente paso.</p><div className="result-topics">{profileTopics[quizResult].map((topic) => <span key={topic}>{topic}</span>)}</div><button className="btn btn-primary btn-small" onClick={() => applyRecommendation(quizResult)} data-testid="button-result-resources">Ver recursos recomendados para mi perfil <ArrowUpRight size={14} /></button></div>}
-              </div>
-              <div className="panel" data-testid="panel-gap-calculator">
-                <div className="panel-title"><div><h3>Brecha académica</h3><p>Una mirada rápida a lo que ya tienes y lo que falta practicar.</p></div><GraduationCap color="var(--pink)" size={27} /></div>
-                <p className="gap-note">La universidad te dio el mapa. Aquí ubicamos las calles que vas a recorrer para llegar a tu primer proyecto real.</p>
-                <div className="gap-toggle"><p>Diagnóstico visual de habilidades</p><button className="btn btn-outline btn-small" onClick={() => setShowGap((show) => !show)} data-testid="button-reveal-gap">{showGap ? 'Ocultar' : 'Descubrir mi brecha'}</button></div>
-                {showGap && <div className="gap-reveal" data-testid="status-gap-revealed"><div className="gap-bar"><span /><span /></div><div className="gap-legend"><span>Base teórica · 67%</span><span>Práctica por construir · 33%</span></div><p className="gap-note">Tu base es suficiente para empezar. Elige una ruta y convierte ese 33% en evidencia: un repo, una consulta, un deploy.</p></div>}
               </div>
             </div>
           </div>

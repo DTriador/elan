@@ -164,7 +164,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .story-card p { color: var(--muted-foreground); font-size: 14px; line-height: 1.7; margin: 0; }
 .story-card .number { color: var(--pink); font: 14px var(--app-font-mono); }
 
-.diagnostic-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.diagnostic-layout { display: grid; grid-template-columns: 1fr; justify-items: center; }
+.diagnostic-layout .panel { width: 100%; max-width: 560px; }
 .panel { background: var(--graphite); border: 1px solid var(--card-border); border-radius: 18px; padding: 28px; }
 .panel-title { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; margin-bottom: 24px; }
 .panel-title h3 { font-size: 23px; line-height: 1.1; margin: 0; letter-spacing: -.03em; }
