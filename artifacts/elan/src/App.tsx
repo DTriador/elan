@@ -469,7 +469,6 @@ function Home() {
               <p className="hero-description">La parte que la universidad deja entre líneas. Rutas, práctica y una comunidad para convertir teoría en algo que puedas mostrar.</p>
               <div className="hero-actions">
                 <a className="btn btn-primary" href="#paths" data-testid="button-explore-paths">Explorar rutas <ArrowUpRight size={16} /></a>
-                <a className="btn btn-outline" href="#diagnostic" data-testid="button-gap-hero">Calcular mi brecha</a>
               </div>
               <label className="global-search hero-search" htmlFor="hero-course-search">
                 <Search size={17} />
