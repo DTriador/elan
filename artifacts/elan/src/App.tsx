@@ -478,9 +478,9 @@ function Home() {
                 <input id="hero-course-search" value={searchQuery} onChange={(event) => { setRecommendedCategories([]); setSearchQuery(event.target.value); }} placeholder="Buscar SQL, Python, Power BI..." aria-label="Buscar recursos por tecnología" data-testid="input-global-search-hero" />
               </label>
               <div className="hero-meta">
-                <div><strong>12</strong><span>rutas y talleres</span></div>
-                <div><strong>en proceso</strong><span>no hay una edad correcta</span></div>
-                <div><strong>01:47</strong><span>tu próxima sesión</span></div>
+                <div><strong>{courses.length}</strong><span>cursos curados</span></div>
+                <div><strong>{courseCategories.length}</strong><span>categorías</span></div>
+                <div><strong>6</strong><span>rutas por perfil</span></div>
               </div>
             </div>
             <div className="network-panel" aria-label="Red de conceptos de aprendizaje">
