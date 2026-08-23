@@ -551,7 +551,7 @@ function Home() {
 
         <section className="section" id="courses">
           <div className="container">
-            <div className="section-heading"><span className="eyebrow">04 / piezas sueltas</span><h2>Una noche. Un tema. Un <em>avance.</em></h2><p>Élan no aloja cursos: encuentra recursos externos que valen tu tiempo, desde opciones gratuitas hasta formaciones pagas.</p></div>
+            <div className="section-heading"><span className="eyebrow">04 / piezas sueltas</span><h2>Una noche. Un tema.<br />  Un <em>avance.</em></h2><p>Élan no aloja cursos: encuentra recursos externos que valen tu tiempo, desde opciones gratuitas hasta formaciones pagas.</p></div>
             <label className="global-search catalog-search" htmlFor="catalog-course-search">
               <Search size={17} />
               <input id="catalog-course-search" value={searchQuery} onChange={(event) => { setRecommendedCategories([]); setSearchQuery(event.target.value); }} placeholder="Buscar por tecnología, plataforma o tema..." aria-label="Buscar recursos en el catálogo" data-testid="input-global-search-catalog" />
