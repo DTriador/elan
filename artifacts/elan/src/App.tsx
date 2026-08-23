@@ -7,6 +7,7 @@ import NotFound from '@/pages/not-found';
 import CoursesPage from '@/pages/courses';
 import ToolsPage from '@/pages/tools';
 import JobsPage from '@/pages/jobs';
+import NewsPage from '@/pages/news';
 import { newsItems } from '@/data/news';
 import {
   ArrowUpRight,
@@ -302,17 +303,19 @@ function Home() {
 
   const homeToolboxItems = useMemo(() => toolboxItems.slice(0, 3), []);
   const homeJobs = useMemo(() => jobBoards.slice(0, 3), []);
+  const homeNewsItems = useMemo(() => newsItems.slice(0, 3), []);
 
   const chooseAnswer = (index: number) => {
     const next = [...quizAnswers];
     next[quizStep] = index;
     setQuizAnswers(next);
   };
+
   const submitQuiz = () => {
-  if (quizStep < quizQuestions.length - 1) {
-    setQuizStep(quizStep + 1);
-    return;
-  }
+    if (quizStep < quizQuestions.length - 1) {
+      setQuizStep(quizStep + 1);
+      return;
+    }
     const scores = Object.fromEntries(Object.keys(profileTopics).map((profile) => [profile, 0])) as Record<QuizProfile, number>;
     quizAnswers.forEach((answer, questionIndex) => {
       const option = quizQuestions[questionIndex]?.options[answer];
@@ -326,13 +329,16 @@ function Home() {
     const recommendedProfile = topProfiles[Math.floor(Math.random() * topProfiles.length)];
     setQuizResult(recommendedProfile);
   };
-    const applyRecommendation = (profile: QuizProfile) => {
-      setRecommendedCategories(profileTopics[profile]);
-      scrollTo('courses');
-    };
-    const resetCourseRecommendation = () => {
-      setRecommendedCategories([]);
-    };
+
+  const applyRecommendation = (profile: QuizProfile) => {
+    setRecommendedCategories(profileTopics[profile]);
+    scrollTo('courses');
+  };
+
+  const resetCourseRecommendation = () => {
+    setRecommendedCategories([]);
+  };
+
   const submitSupport = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSupportSubmitting(true);
@@ -507,9 +513,9 @@ function Home() {
               </div>
               <div className="about-copy">
                 <article className="story-card"><span className="number">01</span><h3>Un impulso vital</h3><p>Élan es una palabra francesa: una fuerza interna que te pone en movimiento. No promete atajos; te ayuda a encontrar el siguiente paso.</p></article>
-                <article className="story-card"><span className="number">02</span><h3>El puente que faltaba</h3><p>Entre aprobar estructuras de datos y resolver un problema real hay un territorio entero. Lo recorremos con proyectos y criterio.</p></article>
-                <article className="story-card"><span className="number">03</span><h3>Para aprender haciendo</h3><p>Para estudiantes de sistemas, backend, data e infraestructura que quieren salir del “sé la teoría” y entrar al “puedo hacerlo”.</p></article>
-                <article className="story-card"><span className="number">04</span><h3>A tu ritmo, en serio</h3><p>Sesiones cortas, explicaciones honestas y herramientas para cuando solo tienes una hora libre antes de dormir.</p></article>
+                <article className="story-card"><span className="number">02</span><h3>El puente que faltaba</h3><p>Entrá a probar estructuras de datos y resolver un problema real hay un territorio entero. Lo recorremos con proyectos y criterio.</p></article>
+                <article className="story-card"><span className="number">03</span><h3>Aprender haciendo</h3><p>Para estudiantes de sistemas, backend, data e infraestructura que quieren salir del “sé la teoría” y entrar al “puedo hacerlo”.</p></article>
+                <article className="story-card"><span className="number">04</span><h3>A tu ritmo</h3><p>Sesiones cortas, explicaciones honestas y herramientas para cuando solo tienes una hora libre antes de dormir.</p></article>
               </div>
             </div>
           </div>
@@ -591,33 +597,42 @@ function Home() {
           <div className="container">
             <div className="section-heading">
               <span className="eyebrow">05 / al día</span>
-              <h2>
-                Lo que estamos <em>anotando.</em>
-              </h2>
-              <p>
-                Ideas, lanzamientos y señales del mercado para que tu aprendizaje tenga contexto.
-              </p>
+              <h2>Lo que estamos <em>anotando.</em></h2>
+              <p>Ideas, lanzamientos y señales del mercado para que tu aprendizaje tenga contexto.</p>
             </div>
 
             <div className="news-grid">
-              {newsItems.map((item) => (
-                <a
-                  className="news-card"
-                  key={item.id}
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-testid={`link-news-${item.id}`}
-                >
-                  <span>
-                    {item.tag} · {item.readTime}
-                  </span>
+              {homeNewsItems.map((item) => {
+                const content = (
+                  <>
+                    <span>{item.tag} · {item.readTime}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.desc}</p>
+                  </>
+                );
+                return item.url ? (
+                  <a
+                    className="news-card"
+                    key={item.id}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-testid={`link-news-${item.id}`}
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <article className="news-card" key={item.id} data-testid={`card-news-${item.id}`}>
+                    {content}
+                  </article>
+                );
+              })}
+            </div>
 
-                  <h3>{item.title}</h3>
-
-                  <p>{item.desc}</p>
-                </a>
-              ))}
+            <div className="see-more-row">
+              <Link href="/novedades" className="btn btn-outline btn-small" data-testid="link-see-more-news">
+                Ver más <ArrowUpRight size={14} />
+              </Link>
             </div>
           </div>
         </section>
@@ -674,6 +689,7 @@ function Router() {
         <Route path="/cursos" component={CoursesPage} />
         <Route path="/herramientas" component={ToolsPage} />
         <Route path="/empleos" component={JobsPage} />
+        <Route path="/novedades" component={NewsPage} />
         <Route component={NotFound} />
       </Switch>
     </RoutedErrorBoundary>

@@ -38,6 +38,15 @@ export const newsItems: NewsItem[] = [
     url: 'https://ekoparty.org/trainings/',
   },
 
+  {
+    id: 'nerdearla-2026',
+    tag: 'Evento',
+    readTime: '3 min',
+    title: 'Nerdearla 2026: conferencia de tecnología en Buenos Aires',
+    desc: 'La edición 2026 de Nerdearla se llevará a cabo del 7 al 9 de octubre en el CEC Buenos Aires. Será una conferencia sobre tecnología con charlas y talleres.',
+    url: 'https://nerdearla.com/',
+  },
+
   // 👉 Sumá acá tus próximas notas: tecnología, notas interesantes, marchas universitarias, etc.
   // id, tag, readTime, title, desc y (si aplica) url.
 ];
